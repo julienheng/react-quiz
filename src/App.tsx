@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./App.css";
 import { useEffect, useReducer } from "react";
 
@@ -5,14 +6,22 @@ import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
+interface State {
+  questions: object[];
+  status: string;
+}
+
+interface Action { 
+  type: string;
+  payload?: any;
+}
+
 const initialState = {
   questions: [],
-
-  // Loading, Error, Ready, Active, Finished
   status: "loading",
 };
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "DataReceived":
       return { ...state, questions: action.payload, status: "ready" };
