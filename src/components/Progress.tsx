@@ -20,7 +20,7 @@ export default function Progress({
         value={index + Number(answer !== null)}
       ></progress>
       <p>
-        Question <strong>{index + answer}</strong> / {numQuestions}
+        Question <strong>{index}</strong> / {numQuestions}
       </p>
       <p>
         <strong>{points}</strong> / {maxPossiblePoints}
