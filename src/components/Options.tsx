@@ -14,7 +14,7 @@ export default function Options({ question, dispatch, answer }: Props) {
   const hasAnswered = answer !== null;
 
   return (
-    <div>
+    <div className="options">
       {question.options.map((option, index) => (
         <button
           key={option}

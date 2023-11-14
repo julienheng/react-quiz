@@ -12,6 +12,7 @@ import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import NextButton from "./components/NextButton";
+import Progress from "./components/Progress";
 
 interface State {
   questions: {
@@ -67,6 +68,7 @@ const reducer = (state: State, action: Action) => {
       return {
         ...state,
         index: state.index + 1,
+        answer: null,
       };
     default:
       throw new (Error as any)("Action type not found");
@@ -80,6 +82,10 @@ function App() {
   );
 
   const numQuestions = questions.length;
+  const maxPossiblePoints = questions.reduce(
+    (prev: number, cur: any) => prev + cur.points,
+    0
+  );
 
   useEffect(function () {
     fetch(`http://localhost:9000/questions`)
@@ -99,6 +105,13 @@ function App() {
         )}
         {status === "active" && (
           <>
+            <Progress
+              maxPossiblePoints={maxPossiblePoints}
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               dispatch={dispatch}
