@@ -1,6 +1,19 @@
+import Options from "./Options";
 
-export default function Question() {
+type Props = {
+  question: {
+    question: string;
+    options: string[];
+    answer: string;
+  };
+};
+
+export default function Question({ question }: Props) {
+  
   return (
-    <div>Question</div>
-  )
+    <div>
+      <h4>{question.question}</h4>
+      <Options question={question}  />
+    </div>
+  );
 }

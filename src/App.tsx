@@ -14,6 +14,7 @@ import Question from "./components/Question";
 interface State {
   questions: object[];
   status: string;
+  index: number;
 }
 
 interface Action {
@@ -24,6 +25,7 @@ interface Action {
 const initialState = {
   questions: [],
   status: "loading",
+  index: 0,
 };
 
 const reducer = (state: State, action: Action) => {
@@ -41,7 +43,7 @@ const reducer = (state: State, action: Action) => {
 
 function App() {
 
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index }, dispatch] = useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
 
@@ -59,7 +61,7 @@ function App() {
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "active" && <Question />}
+        {status === "active" && <Question question={questions[index]} />}
       </Main>
     </div>
   );

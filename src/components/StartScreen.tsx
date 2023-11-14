@@ -1,6 +1,8 @@
+import React from "react";
+
 type Props = {
   numQuestions: number;
-  dispatch: React.Dispatch<unknown>;
+  dispatch: React.Dispatch<{ type: string }>;
 };
 
 export default function StartScreen({ numQuestions, dispatch }: Props) {
