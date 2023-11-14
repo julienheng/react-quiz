@@ -30,6 +30,7 @@ interface State {
   answer: number | null;
   points: number;
   highscore: number;
+  secondsRemaining: number | null;
 }
 
 interface Action {
@@ -44,7 +45,10 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
+  secondsRemaining: null,
 };
+
+const SECS_PER_QUESTION = 30;
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
@@ -53,7 +57,11 @@ const reducer = (state: State, action: Action) => {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
+      };
     case "newAnswer":
       const question = state.questions.at(state.index);
 
@@ -88,14 +96,22 @@ const reducer = (state: State, action: Action) => {
         status: "ready",
         questions: state.points,
       };
+    case "tick":
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining as number - 1,
+        status: state.secondsRemaining === 0 ? "nextQuestion" : state.status,
+      };
     default:
       throw new (Error as any)("Action type not found");
   }
 };
 
 function App() {
-  const [{ questions, status, index, answer, points, highscore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, index, answer, points, highscore, secondsRemaining },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
   const maxPossiblePoints =
@@ -134,7 +150,7 @@ function App() {
               answer={answer}
             />
             <Footer>
-              <Timer />
+              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
               <NextButton
                 dispatch={dispatch}
                 answer={answer}
