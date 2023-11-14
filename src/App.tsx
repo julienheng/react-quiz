@@ -48,7 +48,7 @@ const initialState = {
   secondsRemaining: null,
 };
 
-const SECS_PER_QUESTION = 30;
+const SECS_PER_QUESTION = 5;
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
@@ -99,7 +99,7 @@ const reducer = (state: State, action: Action) => {
     case "tick":
       return {
         ...state,
-        secondsRemaining: state.secondsRemaining as number - 1,
+        secondsRemaining: (state.secondsRemaining as number) - 1,
         status: state.secondsRemaining === 0 ? "nextQuestion" : state.status,
       };
     default:

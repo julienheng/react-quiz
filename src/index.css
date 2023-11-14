@@ -1,6 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
   --color-darkest: #343a40;
@@ -57,8 +57,6 @@ body {
   font-size: 6.5rem;
   font-weight: 600;
 }
-
-
 
 .error {
   text-align: center;
