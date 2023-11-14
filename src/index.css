@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --color-darkest: #343a40;
   --color-dark: #495057;
@@ -45,8 +49,16 @@ body {
   margin-bottom: 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 5rem;
 }
+
+.app-header h1 {
+  font-size: 6.5rem;
+  font-weight: 600;
+}
+
+
 
 .error {
   text-align: center;
