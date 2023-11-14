@@ -1,5 +1,5 @@
 type Props = {
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 function Footer({ children }: Props) {

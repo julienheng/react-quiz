@@ -32,4 +32,6 @@ export default function NextButton({
         Finished
       </button>
     );
+
+  return <div />;
 }
