@@ -1,17 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-type Props = {
-  points: number;
-  maxPossiblePoints: number;
-  highscore: number;
-  dispatch: React.Dispatch<{ type: string }>;
-};
-
-export default function FinishScreen({
-  points,
-  maxPossiblePoints,
-  highscore,
-  dispatch,
-}: Props) {
+import { useQuiz } from "../../contexts/QuizContext";
+export default function FinishScreen() {
+  const { points, maxPossiblePoints, highscore, dispatch } = useQuiz();
   const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;
@@ -24,8 +14,8 @@ export default function FinishScreen({
   return (
     <>
       <p className="result">
-        <span>{emoji}</span> You scored <strong>{points}</strong>  out of {maxPossiblePoints} (
-        {Math.ceil(percentage)}%)
+        <span>{emoji}</span> You scored <strong>{points}</strong> out of{" "}
+        {maxPossiblePoints} ({Math.ceil(percentage)}%)
       </p>
       <p className="highscore">(High Score: {highscore} points)</p>
       <button

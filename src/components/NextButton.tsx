@@ -1,16 +1,8 @@
-type Props = {
-  dispatch: React.Dispatch<{ type: string }>;
-  answer: number | null;
-  index: number;
-  numQuestions: number;
-};
+import { useQuiz } from "../../contexts/QuizContext";
 
-export default function NextButton({
-  dispatch,
-  answer,
-  index,
-  numQuestions,
-}: Props) {
+export default function NextButton() {
+  const { dispatch, answer, index, numQuestions } = useQuiz();
+
   if (answer === null) return null;
 
   if (index < numQuestions - 1)

@@ -1,16 +1,18 @@
+import { useQuiz } from "../../contexts/QuizContext";
+
 type Props = {
   question: {
     question: string;
     options: string[];
     correctOption: number;
-    answer: string | null;
-
+    answer: string;
+    points: number;
   };
-  dispatch: React.Dispatch<{ type: string; payload: number }>;
-  answer: number | null;
 };
 
-export default function Options({ question, dispatch, answer }: Props) {
+export default function Options({ question }: Props) {
+  const { dispatch, answer } = useQuiz();
+
   const hasAnswered = answer !== null;
 
   return (
