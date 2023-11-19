@@ -34,18 +34,6 @@ const initialState = {
   secondsRemaining: null,
 };
 
-// questions,
-// status,
-// index,
-// answer,
-// points,
-// highscore,
-// secondsRemaining,
-// numQuestions,
-// maxPossiblePoints,
-// dispatch,
-
-
 const QuizContext = createContext([] as any);
 
 const SECS_PER_QUESTIONS = 5;
@@ -62,7 +50,8 @@ const reducer = (state: State, action: Action) => {
         status: "active",
         secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
-      const question = state.questions[state.index];
+    case "newAnswer":
+      const question = state.questions.at(state.index);
 
       if (!question) {
         throw new Error("Question not found");
@@ -102,7 +91,6 @@ const reducer = (state: State, action: Action) => {
         status: state.secondsRemaining === 0 ? "nextQuestion" : state.status,
       };
     default:
-      throw new Error("Action type not found");
       throw new (Error as any)("Action type not found");
   }
 };
@@ -157,4 +145,4 @@ function useQuiz() {
   return context;
 }
 
-export { useQuiz, QuizProvider };
+export { QuizProvider, useQuiz };
